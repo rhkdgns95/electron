@@ -2,7 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "none",
+  // mode: "none",
+  mode: "development",
   entry: {
     app: path.join(__dirname, "src", "index.tsx"),
   },
@@ -13,17 +14,29 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: {
-          loader: "ts-loader",
-        },
+        test: /\.(js|ts|tsx)$/,
+        include: /src/,
+        use: [
+          {
+            loader: "ts-loader",
+          },
+        ],
         exclude: /mode_modules|dist/,
       },
     ],
   },
+  devServer: {
+    contentBase: path.join(__dirname, "../dist/renderer"),
+    historyApiFallback: true,
+    compress: true,
+    port: 4000,
+    hot: true,
+    publicPath: "/",
+  },
   output: {
-    filename: "[name].js",
+    filename: "js/[name].js",
     path: path.join(__dirname, "dist"),
+    publicPath: "./",
   },
   plugins: [
     new HtmlWebpackPlugin({

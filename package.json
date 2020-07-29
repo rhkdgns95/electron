@@ -5,12 +5,10 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "babel-loader": "^8.1.0",
+    "electron": "^9.1.2",
     "source-map-loader": "^1.0.1",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
@@ -19,8 +17,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open- --hot",
+    "dev": "webpack-dev-server --mode development --open- --hot",
+    "dev:react": "NODE_ENV=development webpack-dev-server --config webpack.react.config.js --mode development",
+    "dev:electron": "NODE_ENV=development webpack --config webpack.electron.config.js --mode development && electron .",
     "build": "webpack --mode production",
-    "build:high-spped": "webpack --optimize-minimize"
+    "build:fast": "webpack --optimize-minimize"
   }
 }
